@@ -46,5 +46,13 @@ namespace Pima.View.Pages.AnonimPages
             registration.ShowDialog();
             GridBackground.Opacity = 0;
         }
+
+        private void Admin_Click(object sender, RoutedEventArgs e)
+        {
+            Admin admin = new Admin();
+            GridBackground.Opacity = 1;
+            admin.ShowDialog();
+            GridBackground.Opacity = 0;
+        }
     }
 }

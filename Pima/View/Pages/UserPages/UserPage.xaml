@@ -50,7 +50,7 @@
     </Page.Triggers>
 
     <Grid>
-        <Grid x:Name="GridBackground" Background="#55313131" Opacity="0"/>
+        <Grid x:FieldModifier="public" x:Name="GridBackground" Background="#55313131" Opacity="0"/>
         <StackPanel>
             <materialDesign:ColorZone
             Mode="PrimaryMid"
@@ -197,19 +197,25 @@
                 <Button
                     
                     Height="160"
-                    Width="170" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <Ellipse
+                    Width="170" Background="{x:Null}" 
+                    BorderBrush="{x:Null}"
+                    Command="{Binding AddFoto_Click}">
+                    <Grid>
+                        <TextBlock
+                            Text="Кликните, тобы добавить фото"/>
+                        <Ellipse
                     Margin="0,10,0,10"
                     Height="130" 
                     Width="130">
                         <Ellipse.Fill>
-                            <ImageBrush  ImageSource="F:\3k1s\БД\KP\Pima\Pima\View\Images\doutzen-kroes-victoria-s-7073.jpg" Stretch="UniformToFill"/>
+                            <ImageBrush  ImageSource="{Binding Image}" Stretch="UniformToFill"/>
                         </Ellipse.Fill>
                     </Ellipse>
+                    </Grid>
                 </Button>
                 <Label
                     Margin="0,0,0,0"
-                    Content="UserName"
+                    Content="{Binding UserName}"
                     FontFamily="{DynamicResource BaseFont}"
                     FontSize="{DynamicResource Big}"
                     HorizontalAlignment="Center"/>

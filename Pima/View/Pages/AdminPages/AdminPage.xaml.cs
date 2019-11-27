@@ -1,6 +1,4 @@
 ﻿using Pima.View.Pages.AnonimPages;
-using Pima.View.Windows;
-using Pima.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pima.View.Pages.UserPages
+namespace Pima.View.Pages.AdminPages
 {
     /// <summary>
-    /// Логика взаимодействия для UserPage.xaml
+    /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
-    public partial class UserPage : Page
+    public partial class AdminPage : Page
     {
-        UserPageViewModel context = new UserPageViewModel();
-        public UserPage()
+        public AdminPage()
         {
             InitializeComponent();
-            DataContext = context;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,7 +31,7 @@ namespace Pima.View.Pages.UserPages
             Application.Current.MainWindow.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             foreach (Window window in Application.Current.Windows)
             {
@@ -46,6 +42,5 @@ namespace Pima.View.Pages.UserPages
                 }
             }
         }
-
     }
 }

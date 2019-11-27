@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -105,9 +106,15 @@
     <Compile Include="Model\TABs.cs" />
     <Compile Include="Model\TABsUser.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\Converter.cs" />
+    <Compile Include="ViewModel\CurrentUser.cs" />
     <Compile Include="ViewModel\Pages\AnonimPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\UserPageViewModel.cs" />
+    <Compile Include="ViewModel\Validation.cs" />
     <Compile Include="ViewModel\Windows\MainViewModel.cs" />
+    <Compile Include="View\Pages\AdminPages\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\AnonimPages\AnonimPage.xaml.cs">
       <DependentUpon>AnonimPage.xaml</DependentUpon>
     </Compile>
@@ -147,9 +154,16 @@
     <Compile Include="View\UserControls\TABsCard.xaml.cs">
       <DependentUpon>TABsCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Pages\AdminPages\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\AnonimPages\AnonimPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\TABsCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

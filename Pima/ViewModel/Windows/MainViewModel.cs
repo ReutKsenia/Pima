@@ -22,10 +22,10 @@ namespace Pima.ViewModel.Windows
 
         public MainViewModel()
         {
-            UserPage = new UserPage();
+            //UserPage = new UserPage();
             AnonimPage = new AnonimPage();
 
-            CurrentPage = UserPage;
+            CurrentPage = AnonimPage;
         }
     }
 }

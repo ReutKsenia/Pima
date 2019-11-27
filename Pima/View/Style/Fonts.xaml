@@ -2,9 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Pima.View.Style"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
-    <FontFamily x:Key="SecondFont">#Geometrica Sans</FontFamily>
-    <FontFamily x:Key="BaseFont">#Champagne &amp; Limousines</FontFamily>
+    
+    <FontFamily x:Key="SecondFont">#Champagne &amp; Limousines</FontFamily>
+    <FontFamily x:Key="BaseFont">#Roboto</FontFamily>
+    <system:Double x:Key="Smal2">10</system:Double>
     <system:Double x:Key="Smal1">12</system:Double>
     <system:Double x:Key="Smal">14</system:Double>
     <system:Double x:Key="Regular">16</system:Double>

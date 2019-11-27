@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pima"
         mc:Ignorable="d"
         WindowState="Maximized"
-        WindowStyle="None">
+        WindowStyle="None" >
     <!--Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"-->
     <Grid>

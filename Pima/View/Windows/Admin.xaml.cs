@@ -1,6 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using Pima.Model;
-using Pima.View.Pages.UserPages;
+using Pima.View.Pages.AdminPages;
 using Pima.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,13 +20,13 @@ using System.Windows.Shapes;
 namespace Pima.View.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для Login.xaml
+    /// Логика взаимодействия для Admin.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Admin : Window
     {
         OracleDbContext db = null;
         public static int UserId = 0;
-        public Login()
+        public Admin()
         {
             InitializeComponent();
             db = new OracleDbContext();
@@ -46,9 +46,9 @@ namespace Pima.View.Windows
                 try
                 {
                     User user1 = db.Users.FirstOrDefault(x => x.Login == UserName.Text);
-                    if (user1 != null && user1.Login != "admin")
+                    if (user1 != null && user1.Login == "admin")
                     {
-                        
+
                         if (User.getHash(PasswordBox.Password).Equals(user1.Password))
                         {
                             string Password1 = User.getHash(PasswordBox.Password);
@@ -68,7 +68,7 @@ namespace Pima.View.Windows
                             {
                                 if (window.GetType() == typeof(MainWindow))
                                 {
-                                    UserPage user = new UserPage();
+                                    AdminPage user = new AdminPage();
                                     (window as MainWindow).CurrentPage.Navigate(user);
 
                                 }
@@ -79,7 +79,7 @@ namespace Pima.View.Windows
                             ErrorPassword.Content = "Invalid password.";
                             ErrorPassword.Visibility = Visibility.Visible;
                         }
-                        
+
                     }
                     else
                     {

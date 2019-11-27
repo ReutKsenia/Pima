@@ -1,4 +1,6 @@
-﻿using Pima.ViewModel.Windows;
+﻿using Pima.View.Pages.UserPages;
+using Pima.View.Windows;
+using Pima.ViewModel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;

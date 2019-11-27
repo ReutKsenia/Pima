@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,5 +26,19 @@ namespace Pima.Model
         public virtual ICollection<NotesUser> NotesUsers { get; set; }
         public virtual ICollection<TABsUser> TABsUsers { get; set; }
         public virtual ICollection<ArticlesUser> ArticlesUsers { get; set; }
+
+        public static string getHash(string password)
+        {
+            if (String.IsNullOrEmpty(password))
+            {
+                return "-1";
+            }
+            else
+            {
+                var md5 = MD5.Create();
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hash);
+            }
+        }
     }
 }

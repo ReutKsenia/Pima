@@ -1,6 +1,8 @@
-﻿using Pima.Model;
+﻿using Oracle.ManagedDataAccess.Client;
+using Pima.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,33 @@ namespace Pima.View.Windows
         {
             db = new OracleDbContext();
 
+            if (Pima.ViewModel.Validation.ValidateRegisterAndLogin(UserName, ErrorUsername, PasswordBox, ErrorPassword, PasswordBox2, ErrorConfirmPassword))
+            {
+                try
+                {
+                    User user1 = db.Users.FirstOrDefault(x => x.Login == UserName.Text);
+                    if (user1 == null)
+                    {
+                        string Password1 = User.getHash(PasswordBox.Password);
+                        var Login = new OracleParameter("Login", OracleDbType.NVarchar2, UserName.Text, ParameterDirection.Input);
+                        var Password = new OracleParameter("Password", OracleDbType.NVarchar2, Password1, ParameterDirection.Input);
+
+                        var sql = "BEGIN REGISTRATION(:Login, :Password); END;";
+                        db.Database.ExecuteSqlCommand(sql, Login, Password);
+                        Reg.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ErrorUsername.Content = "A user with the same name already exists.";
+                        ErrorUsername.Visibility = Visibility.Visible;
+                    }
+                }
+                catch
+                {
+                    Reg.Foreground = new SolidColorBrush(Colors.Red);
+                    Reg.Visibility = Visibility.Visible;
+                }
+            }    
         }
     }
 }

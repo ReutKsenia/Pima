@@ -1,3 +1,4 @@
+----------------------------------------------------PROGRAMMER------------------------------------------------------------------
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
 --DROP TABLESPACE TS_PROGRAMMER;
@@ -33,3 +34,29 @@ CREATE USER PROGRAMMER IDENTIFIED BY Pa$$word
 
 
 GRANT RL_PROGRAMMER TO PROGRAMMER;
+
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

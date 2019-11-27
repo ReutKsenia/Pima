@@ -28,7 +28,7 @@
                 HorizontalAlignment="Center"
                 Foreground="{DynamicResource DarkBaseBrush}"/>
             <StackPanel Orientation="Horizontal"
-                        Margin="20,20,10,20">
+                        Margin="20,20,10,0">
                 <materialDesign:PackIcon Kind="Account" 
                                          VerticalAlignment="Bottom"
                                          Height="25"
@@ -46,6 +46,14 @@
                     FontSize="{DynamicResource Regular}"
                     Width="270"/>
             </StackPanel>
+            <Label 
+                Height="22"
+                Name="ErrorUsername"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left"
+                Margin="46,-3,0,0"
+                Foreground="Red"
+                FontSize="{DynamicResource Smal2}"/>
             <StackPanel Orientation="Horizontal"
                         Margin="20,0,0,0">
                 <materialDesign:PackIcon Kind="Lock" 
@@ -65,13 +73,22 @@
                     FontFamily="{DynamicResource BaseFont}"
                     FontSize="{DynamicResource Regular}" Width="271"/>
             </StackPanel>
+            <Label 
+                Height="22"
+                Name="ErrorPassword"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left"
+                Margin="46,-3,0,0"
+                Foreground="Red"
+                FontSize="{DynamicResource Smal2}"/>
             <Button
-                Margin="0,30,0,0"
+                Name="LoginButton"
+                Margin="0,20,0,0"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                 Width="100"
                 ToolTip="Resource name: MaterialDesignRaisedAccentButton"
                 FontFamily="{DynamicResource BaseFont}"
-                FontSize="{DynamicResource Big}" FontWeight="Normal">
+                FontSize="{DynamicResource Big}" FontWeight="Normal" Click="LoginButton_Click">
                 Войти
             </Button>
             <Button 
@@ -82,7 +99,8 @@
                 FontFamily="{DynamicResource BaseFont}"
                 FontWeight="Normal"
                 FontSize="{DynamicResource Smal1}">
-                <TextBlock HorizontalAlignment="Left" 
+                <TextBlock 
+                    HorizontalAlignment="Left" 
                            TextDecorations="Underline">
                     Забыли пароль?
                 </TextBlock>
