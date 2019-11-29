@@ -199,10 +199,24 @@ namespace Pima.View.Pages.SharedPages
         {
             var currentArticle = (Article)((ToggleButton)sender).Tag;
             db = new OracleDbContext();
-            var ArticleId = new OracleParameter("ArticleId", OracleDbType.Int32, currentArticle.ArticleId, ParameterDirection.Input);
+            var ArticlesId = new OracleParameter("ArticlesId", OracleDbType.Int32, currentArticle.ArticleId, ParameterDirection.Input);
             var UserId = new OracleParameter("UserId", OracleDbType.Int32, CurrentUser.User.UserId, ParameterDirection.Input);
-            var sql = "BEGIN ADDARTICLEUSER(:UserId, :ArticleId); END;";
-            var update = db.Database.ExecuteSqlCommand(sql, UserId, ArticleId);
+            var sql = "BEGIN ADDARTICLEUSER(:UserId, :ArticlesId); END;";
+            var update = db.Database.ExecuteSqlCommand(sql, UserId, ArticlesId);
+        }
+
+        private void Add_UncheckedArticleMouseClick(object sender, RoutedEventArgs e)
+        {
+            //OracleDbContext db = new OracleDbContext();
+            //var currentArticle = (ArticlesUser)((ToggleButton)sender).Tag;
+            //var ArticleId = new OracleParameter("ArticlesUserId", OracleDbType.Int32, currentArticle.ArticlesUserId, ParameterDirection.Input);
+            //var sql = "BEGIN ARTICLEUSERDELETE(:ArticlesUserId); END;";
+            //var update = db.Database.ExecuteSqlCommand(sql, ArticleId);
+            //db.Articles.Load();
+            //int UserId = CurrentUser.User.UserId;
+            //var art = db.ArticlesUsers.Where(x => x.UserId_ArticlesUser == UserId);
+
+            //SearchResultList.ItemsSource = art.ToList();
         }
     }
 }

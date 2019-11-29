@@ -58,7 +58,8 @@
                                 OpenArticleMouseClick="ArticleCard_OpenArticleMouseClick" 
                                 UpdateArticleMouseClick="Add_UpdateArticleMouseClick"
                                 DeleteArticleMouseClick="Add_DeleteArticleMouseClick"
-                                AddArticleMouseClick="Add_AddArticleMouseClick"/>
+                                AddArticleMouseClick="Add_AddArticleMouseClick"
+                                UncheckedArticleMouseClick="Add_UncheckedArticleMouseClick"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

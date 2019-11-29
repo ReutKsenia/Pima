@@ -66,11 +66,12 @@
                         Name="Add"
                         Margin="0 0 6 0"
                         Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
+                        ToolTip="Добавить в свой список"
                         IsChecked="False" 
                         Background="{DynamicResource LightBaseBrush}" 
                         BorderBrush="{DynamicResource AccentBrush}" 
-                        Checked="Add_Checked" Unchecked="Add_Unchecked">
+                        Checked="Add_Checked" 
+                        Unchecked="Add_Unchecked">
                         <materialDesign:PackIcon
                             Kind="Heart"
                             Height="21"
@@ -85,7 +86,8 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="40"
                         Padding="6 0 6 0"
-                        materialDesign:RippleAssist.IsCentered="True" Click="Pen_Click">
+                        materialDesign:RippleAssist.IsCentered="True" 
+                        Click="Pen_Click">
                         <materialDesign:PackIcon
                             Kind="LeadPencil" 
                             Height="21"

@@ -93,13 +93,66 @@ DELETE FROM "ArticlesUser" WHERE "ArticlesUser"."ArticleId_ArticlesUser"=p_artid
 COMMIT;
 END;
 
+----------------------------------------------------------ArticlesUserDelete---------------------------------------------------------
+--DROP PROCEDURE ARTICLEUSERDELETE;
+create or replace PROCEDURE ARTICLEUSERDELETE(p_artid IN "ArticlesUser"."ArticlesUserId"%TYPE
+                                              ) IS
+BEGIN
+DELETE FROM "ArticlesUser" WHERE "ArticlesUser"."ArticlesUserId"=p_artid;
+COMMIT;
+END;
 
+----------------------------------------------------------AddArticlesUser-------------------------------------------------------
+--DROP PROCEDURE ADDARTICLEUSER;
+create or replace PROCEDURE ADDARTICLEUSER (p_userid IN "User"."UserId"%TYPE, 
+                                      p_artid IN "Article"."ArticleId"%TYPE
+                                      ) IS
+BEGIN
+   INSERT INTO "ArticlesUser"("UserId_ArticlesUser", "ArticleId_ArticlesUser") VALUES (p_userid, p_artid); 
+    COMMIT;
+END;
 
+----------------------------------------------------------NotesUpdate---------------------------------------------------------
+--DROP PROCEDURE NOTESUPDATE;
+CREATE OR REPLACE PROCEDURE NOTESUPDATE(p_notesid IN "Notes"."NotesId"%TYPE,
+                                        p_name IN "Notes"."Name"%TYPE, 
+                                        p_author IN "Notes"."Author"%TYPE,
+                                        p_note IN "Notes"."Note"%TYPE,
+                                        p_descrip IN "Notes"."Description"%TYPE
+                                        ) IS
+BEGIN
+UPDATE "Notes" SET "Notes"."Name" = p_name, "Notes"."Author" = p_author, "Notes"."Note" = p_note, "Notes"."Description" = p_descrip
+             WHERE "Notes"."NotesId" = p_notesid;
+COMMIT;
+END;
 
+----------------------------------------------------------NotesDelete---------------------------------------------------------
+--DROP PROCEDURE ARTICLEDELETE;
+CREATE OR REPLACE PROCEDURE NOTESDELETE(p_notesid IN "Notes"."NotesId"%TYPE) IS
+BEGIN
+DELETE FROM "Notes" WHERE "Notes"."NotesId" = p_notesid;
+DELETE FROM "NotesUser" WHERE "NotesUser"."NotesId_NotesUser"= p_notesid;
+COMMIT;
+END;
 
+----------------------------------------------------------AddNotessUser-------------------------------------------------------
+--DROP PROCEDURE ADDNOTESUSER;
+create or replace PROCEDURE ADDNOTESUSER (p_userid IN "User"."UserId"%TYPE, 
+                                          p_notesid IN "Notes"."NotesId"%TYPE
+                                          ) IS
+BEGIN
+    INSERT INTO "NotesUser"("UserId_NotesUser", "NotesId_NotesUser") VALUES (p_userid, p_notesid);
+    COMMIT;
+END;
 
-
-
+----------------------------------------------------------NotesUserDelete---------------------------------------------------------
+--DROP PROCEDURE NOTESUSERDELETE;
+create or replace PROCEDURE NOTESUSERDELETE(p_noteid IN "NotesUser"."NotesUserId"%TYPE
+                                              ) IS
+BEGIN
+DELETE FROM "NotesUser" WHERE "NotesUser"."NotesUserId" = p_noteid;
+COMMIT;
+END;
 
 
 

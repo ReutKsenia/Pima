@@ -55,5 +55,11 @@ namespace Pima.View.Pages.UserPages
             FavoritesArticle favorites = new FavoritesArticle();
             CurrentPage.Navigate(favorites);
         }
+
+        private void MyNotes_Click(object sender, RoutedEventArgs e)
+        {
+            FavoritesNotes favorites = new FavoritesNotes();
+            CurrentPage.Navigate(favorites);
+        }
     }
 }
