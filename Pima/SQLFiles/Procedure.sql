@@ -33,6 +33,7 @@ DBMS_OUTPUT.put_line(userid);
 END;
 
 ------------------------------------------------------PersonalInfoUpdate--------------------------------------------------------
+--DROP PROCEDURE PERSONAINFOUPDATE;
 CREATE OR REPLACE PROCEDURE PERSONAINFOUPDATE(p_userid IN "User"."UserId"%TYPE,
                                               p_login IN "User"."Login"%TYPE, 
                                               p_password IN "User"."Password"%TYPE,
@@ -44,7 +45,8 @@ UPDATE "User" SET "User"."Login" = p_login, "User"."Password" = p_password, "Use
 COMMIT;
 END;
 
--------------------------------------------------------Show Articles--------------------------------------------------------------
+-------------------------------------------------------Show Articles------------------------------------------------------------
+--DROP PROCEDURE SHOWARTICLE;
 CREATE OR REPLACE PROCEDURE SHOWARTICLE(p_articleid OUT "Article"."ArticleId"%TYPE, p_title OUT "Article"."Title"%TYPE,
                                         p_text OUT "Article"."Text"%TYPE, p_image OUT "Article"."Image"%TYPE
                                         ) IS
@@ -69,9 +71,27 @@ BEGIN
 SHOWCATALOG(productid, name, manufacturer, price, photo);
 END;
 
+----------------------------------------------------------ArticleUpdate---------------------------------------------------------
+--DROP PROCEDURE ARTICLEUPDATE;
+CREATE OR REPLACE PROCEDURE ARTICLEUPDATE(p_artid IN "Article"."ArticleId"%TYPE,
+                                              p_title IN "Article"."Title"%TYPE, 
+                                              p_text IN "Article"."Text"%TYPE,
+                                              p_image IN "Article"."Image"%TYPE
+                                              ) IS
+BEGIN
+UPDATE "Article" SET "Article"."Title" = p_title, "Article"."Text" = p_text, "Article"."Image" = p_image
+             WHERE "Article"."ArticleId" = p_artid;
+COMMIT;
+END;
 
-
-
+----------------------------------------------------------ArticleDelete---------------------------------------------------------
+--DROP PROCEDURE ARTICLEDELETE;
+CREATE OR REPLACE PROCEDURE ARTICLEDELETE(p_artid IN "Article"."ArticleId"%TYPE) IS
+BEGIN
+DELETE FROM "Article" WHERE "Article"."ArticleId" = p_artid;
+DELETE FROM "ArticlesUser" WHERE "ArticlesUser"."ArticleId_ArticlesUser"=p_artid;
+COMMIT;
+END;
 
 
 

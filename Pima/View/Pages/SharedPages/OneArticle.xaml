@@ -4,20 +4,154 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Pima.View.Pages.SharedPages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="OneArticle">
 
     <Grid>
-        <ScrollViewer>
-            <StackPanel>
-                <WrapPanel>
+        <ScrollViewer Height="710">
+            <!--<DockPanel>
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                    <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button
+                            x:FieldModifier="public"
+                            x:Name="Save"
+                            Visibility="Visible"
+                            Style="{StaticResource MaterialDesignIconButton}" 
+                            HorizontalAlignment="Right">
+                            <materialDesign:PackIcon
+                                Kind="ContentSaveEdit" />
+                        </Button>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontFamily="{DynamicResource BaseFont}"
+                            FontSize="{DynamicResource Regular}"
+                            Text="Добавить новую статью" VerticalAlignment="Center"/>
+                    </StackPanel>
                     <TextBlock
-                    HorizontalAlignment="Center"
+                        x:FieldModifier="public"
+                        x:Name="Title"
+                        HorizontalAlignment="Center"
+                        FontFamily="{DynamicResource BaseFont}"
+                        FontSize="{DynamicResource H3}"
+                        Text="Легато на гитаре. Приемы легато «Hammer on» и «Pull off» на гитаре для начинающих"/>
+                </StackPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    x:FieldModifier="public"
+                        x:Name="Text"
+                        FontFamily="{DynamicResource BaseFont}"
+                    FontSize="{DynamicResource Regular}"
+                    TextWrapping="Wrap"/>
+                <Grid
+                    DockPanel.Dock="Right">
+                    <Rectangle
+                    x:FieldModifier="public"
+                    x:Name="Image"
+                    Height="200"
+                    Width="400">
+                        <Rectangle.Fill>
+                            <ImageBrush
+                            x:FieldModifier="public"
+                            x:Name="Source"
+                            ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+            </DockPanel>-->
+            <StackPanel>
+                <Label
+                    x:FieldModifier="public"
+                    x:Name="ID"
+                    Visibility="Collapsed"/>
+                <StackPanel
+                    x:FieldModifier="public"
+                    x:Name="SaveStackPanel"
+                    Visibility="Collapsed"
+                    Margin="5" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+                    <Button
+                        Tag="{Binding}"
+                            x:FieldModifier="public"
+                            x:Name="Save"
+                            Visibility="Visible"
+                            Style="{StaticResource MaterialDesignIconButton}" 
+                            HorizontalAlignment="Right" Click="Save_Click">
+                        <materialDesign:PackIcon
+                                Kind="ContentSaveEdit" />
+                    </Button>
+                    <TextBlock
+                            HorizontalAlignment="Center"
+                            FontFamily="{DynamicResource BaseFont}"
+                            FontSize="{DynamicResource Regular}"
+                            Text="Сохранить изменения" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock
+                        x:FieldModifier="public"
+                        x:Name="Title"
+                        HorizontalAlignment="Center"
+                        FontFamily="{DynamicResource BaseFont}"
+                        FontSize="{DynamicResource H3}"
+                        Text="Title" 
+                        VerticalAlignment="Center"
+                    Margin="5"/>
+                    <TextBox
+                        Margin="5"
+                    x:FieldModifier="public"
+                    x:Name="TitleTextBox"
+                    Visibility="Collapsed"
+                    Text="{Binding ElementName=Title,Path=Text}"
                     FontFamily="{DynamicResource BaseFont}"
-                    FontSize="{DynamicResource H3}"
-                    Text="Легато на гитаре. Приемы легато «Hammer on» и «Pull off» на гитаре для начинающих"/>
-                </WrapPanel>
+                    FontSize="{DynamicResource H3}" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"/>
+                
+                <Rectangle
+                    RadiusX="5"
+                    RadiusY="5"
+                    x:FieldModifier="public"
+                    x:Name="Image"
+                    Height="400"
+                    Width="700">
+                    <Rectangle.Fill>
+                        <ImageBrush
+                            x:FieldModifier="public"
+                            x:Name="Source"
+                            ImageSource="{Binding Image}" 
+                            Stretch="Uniform"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button
+                    Margin="20"
+                    x:FieldModifier="public"
+                    x:Name="NewImage"
+                    Height="50"
+                    Width="50"
+                    Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                    Visibility="Collapsed" Background="{DynamicResource AccentBrush}" BorderBrush="{DynamicResource AccentBrush}" Click="NewImage_Click">
+                    <materialDesign:PackIcon
+                        Kind="Add"
+                        Height="24"
+                        Width="24" />
+                </Button>
+                <TextBlock
+                    Margin="15,5,5,5"
+                        x:FieldModifier="public"
+                        x:Name="Text"
+                        FontFamily="{DynamicResource BaseFont}"
+                    FontSize="{DynamicResource Regular}"
+                    TextWrapping="Wrap"
+                    Text="Content"/>
+                <TextBox
+                    Margin="15,5,5,5"
+                    x:FieldModifier="public"
+                    x:Name="TextEditor"
+                    FontFamily="{DynamicResource BaseFont}"
+                    FontSize="{DynamicResource Regular}"
+                    Text="{Binding ElementName=Text,Path=Text}"
+                    Visibility="Collapsed"
+                    TextWrapping="Wrap"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -1,5 +1,8 @@
-﻿using Pima.View.Pages.AnonimPages;
+﻿using Pima.Model;
+using Pima.View.Pages.AnonimPages;
+using Pima.View.Pages.SharedPages;
 using Pima.View.Windows;
+using Pima.ViewModel;
 using Pima.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
@@ -47,5 +50,10 @@ namespace Pima.View.Pages.UserPages
             }
         }
 
+        private void MyArticles_Click(object sender, RoutedEventArgs e)
+        {
+            FavoritesArticle favorites = new FavoritesArticle();
+            CurrentPage.Navigate(favorites);
+        }
     }
 }

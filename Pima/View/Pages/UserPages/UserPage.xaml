@@ -231,9 +231,10 @@
                 <ListView Foreground="#FF313131" FontFamily="Champagne &amp; Limousines" FontSize="18"  Margin="0,10,0,0">
                     <ListViewItem Height="45" Padding="0">
                         <Button
+                            x:Name="MyArticles"
                             Width="250"
                             Height="40"
-                            Template="{DynamicResource ButtonMenu}">
+                            Template="{DynamicResource ButtonMenu}" Click="MyArticles_Click">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <materialDesign:PackIcon Kind="PlaylistEdit" Width="20" Height="20" Foreground="Gray" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock 

@@ -1,4 +1,5 @@
 ﻿using Pima.View.Pages.AnonimPages;
+using Pima.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace Pima.View.Pages.AdminPages
     /// </summary>
     public partial class AdminPage : Page
     {
+        AdminPageViewModel context = new AdminPageViewModel();
         public AdminPage()
         {
             InitializeComponent();
+            DataContext = context;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -5,15 +5,65 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Pima.View.Pages.SharedPages"
       xmlns:usercontrol1="clr-namespace:Pima.View.UserControls"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ArticulPage">
+      Title="ArticulPage" Loaded="Page_Loaded">
 
     <Grid>
-        <ScrollViewer>
-            <WrapPanel>
-                <usercontrol1:ArticleCard Margin="15" OpenArticleMouseClick="ArticleCard_OpenArticleMouseClick"/>
-            </WrapPanel>
+        <StackPanel>
+            <StackPanel 
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                x:FieldModifier="public"
+                x:Name="New"
+                Visibility="Collapsed"
+                Margin="6">
+            <Button
+                
+                Height="30"
+                Width="30"
+                Style="{StaticResource MaterialDesignFloatingActionDarkButton}" 
+                HorizontalAlignment="Right"
+                Click="New_Click"
+                >
+                <materialDesign:PackIcon
+                    Kind="Add"
+                    Height="24"
+                    Width="24" />
+            </Button>
+                <TextBlock
+                    Margin="6,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontFamily="{DynamicResource BaseFont}"
+                            FontSize="{DynamicResource Regular}"
+                            Text="Добавить новую статью" VerticalAlignment="Center"/>
+            </StackPanel>
+            <ScrollViewer Height="690">
+                <ItemsControl
+                x:Name="SearchResultList" 
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <usercontrol1:ArticleCard 
+                                x:Name="Add" 
+                                Margin="25" 
+                                OpenArticleMouseClick="ArticleCard_OpenArticleMouseClick" 
+                                UpdateArticleMouseClick="Add_UpdateArticleMouseClick"
+                                DeleteArticleMouseClick="Add_DeleteArticleMouseClick"
+                                AddArticleMouseClick="Add_AddArticleMouseClick"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+         
         </ScrollViewer>
+        </StackPanel>
     </Grid>
 </Page>

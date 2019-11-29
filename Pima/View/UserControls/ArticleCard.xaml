@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Pima.View.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Grid>
         <materialDesign:Card
                 Width="200">
@@ -20,11 +20,14 @@
                         Height="Auto" />
                 </Grid.RowDefinitions>
                 <Image
-                    Source="{Binding ArticleImage}"
+                    x:FieldModifier="public"
+                    x:Name="Image"
+                    Source="{Binding Image}"
                     Height="140"
                     Width="196"
                     Stretch="UniformToFill" />
                 <Button
+                    Tag="{Binding}"
                     Grid.Row="0"
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
@@ -40,12 +43,17 @@
                     Grid.Row="1"
                     Margin="8 24 8 0">
                     <TextBlock
+                        x:FieldModifier="public"
+                        x:Name="Title"
                         FontWeight="Bold"
-                        Text="{Binding TitleArticle}"/>
+                        Text="{Binding Title}"
+                        TextWrapping="Wrap"/>
                     <TextBlock
-                        TextWrapping="Wrap"
+                        x:FieldModifier="public"
+                        x:Name="Text"
                         VerticalAlignment="Center"
-                        Text="{Binding TextArticle}"/>
+                        Text="{Binding Text}" 
+                        TextWrapping="NoWrap"/>
                 </StackPanel>
                 <StackPanel
                     HorizontalAlignment="Right"
@@ -53,18 +61,51 @@
                     Orientation="Horizontal"
                     Margin="8">
                     <ToggleButton
+                        Tag="{Binding}"
+                        x:FieldModifier="public"
+                        Name="Add"
                         Margin="0 0 6 0"
                         Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
                         ToolTip="MaterialDesignFlatPrimaryToggleButton"
                         IsChecked="False" 
                         Background="{DynamicResource LightBaseBrush}" 
-                        BorderBrush="{DynamicResource AccentBrush}">
+                        BorderBrush="{DynamicResource AccentBrush}" 
+                        Checked="Add_Checked" Unchecked="Add_Unchecked">
                         <materialDesign:PackIcon
                             Kind="Heart"
                             Height="21"
                             Width="21" 
                             Foreground="{DynamicResource DarkBaseBrush}" />
                     </ToggleButton>
+                    
+                    <Button
+                        Tag="{Binding}"
+                        x:FieldModifier="public"
+                        Name="Pen"
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="40"
+                        Padding="6 0 6 0"
+                        materialDesign:RippleAssist.IsCentered="True" Click="Pen_Click">
+                        <materialDesign:PackIcon
+                            Kind="LeadPencil" 
+                            Height="21"
+                            Width="21" 
+                            Foreground="{DynamicResource DarkBaseBrush}"/>
+                    </Button>
+                    <Button
+                        Tag="{Binding}"
+                        x:FieldModifier="public"
+                        Name="Tresh"
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="40"
+                        Padding="0 0 6 0"
+                        materialDesign:RippleAssist.IsCentered="True" Click="Tresh_Click">
+                        <materialDesign:PackIcon
+                            Kind="Delete" 
+                            Height="21"
+                            Width="21" 
+                            Foreground="{DynamicResource DarkBaseBrush}"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>

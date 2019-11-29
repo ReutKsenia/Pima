@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -108,6 +109,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\Converter.cs" />
     <Compile Include="ViewModel\CurrentUser.cs" />
+    <Compile Include="ViewModel\Pages\AdminPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\AnonimPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\UserPageViewModel.cs" />
     <Compile Include="ViewModel\Validation.cs" />
@@ -135,6 +137,9 @@
     </Compile>
     <Compile Include="View\Pages\SharedPages\TABsPage.xaml.cs">
       <DependentUpon>TABsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\UserPages\FavoritesArticle.xaml.cs">
+      <DependentUpon>FavoritesArticle.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\UserPages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
@@ -189,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\SharedPages\TABsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\UserPages\FavoritesArticle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
