@@ -284,9 +284,10 @@
                     </ListViewItem>
                     <ListViewItem Height="45" Padding="0">
                         <Button
+                            x:Name="MyTABs"
                             Width="250"
                             Height="40"
-                            Template="{DynamicResource ButtonMenu}">
+                            Template="{DynamicResource ButtonMenu}" Click="MyTABs_Click">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <materialDesign:PackIcon Kind="GuitarPick" Width="20" Height="20" Foreground="#FFD00000" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock 

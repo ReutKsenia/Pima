@@ -69,11 +69,11 @@ namespace Pima.View.Pages.UserPages
                 one.Author.Text = note.Author;
                 if (note.Note != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(note.Note);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(note.Note);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 if (note.Description != null)
                 {

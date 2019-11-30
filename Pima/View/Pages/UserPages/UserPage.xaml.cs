@@ -61,5 +61,11 @@ namespace Pima.View.Pages.UserPages
             FavoritesNotes favorites = new FavoritesNotes();
             CurrentPage.Navigate(favorites);
         }
+
+        private void MyTABs_Click(object sender, RoutedEventArgs e)
+        {
+            FavoritesTABs favorites = new FavoritesTABs();
+            CurrentPage.Navigate(favorites);
+        }
     }
 }

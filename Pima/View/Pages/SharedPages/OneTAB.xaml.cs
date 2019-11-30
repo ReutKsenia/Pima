@@ -21,12 +21,12 @@ using System.Windows.Shapes;
 namespace Pima.View.Pages.SharedPages
 {
     /// <summary>
-    /// Логика взаимодействия для OneNote.xaml
+    /// Логика взаимодействия для OneTAB.xaml
     /// </summary>
-    public partial class OneNote : Page
+    public partial class OneTAB : Page
     {
-        private string nameNote;
-        public OneNote()
+        private string nameTAB;
+        public OneTAB()
         {
             InitializeComponent();
         }
@@ -39,7 +39,7 @@ namespace Pima.View.Pages.SharedPages
             if (dlg.ShowDialog() == true)
             {
                 string selectedFileName = dlg.FileName;
-                nameNote = selectedFileName;
+                nameTAB = selectedFileName;
                 Source.Source = new BitmapImage(new Uri(selectedFileName));
                 Source.Visibility = Visibility.Visible;
             }
@@ -50,19 +50,19 @@ namespace Pima.View.Pages.SharedPages
             OracleDbContext db = new OracleDbContext();
             byte[] image = null;
             int id = Int32.Parse(ID.Content.ToString());  //костыль))
-            var currentNote = db.Notes.FirstOrDefault(x => x.NotesId == id);
-            if(Source.Source != null)
+            var currentTAB = db.TABs.FirstOrDefault(x => x.TABsId == id);
+            if (Source.Source != null)
             {
-                image = Converter.ConvertImageToByteArray(nameNote);
+                image = Converter.ConvertImageToByteArray(nameTAB);
             }
 
-            var NotesId = new OracleParameter("NotesId", OracleDbType.Int32, currentNote.NotesId, ParameterDirection.Input);
+            var TABsId = new OracleParameter("TABsId", OracleDbType.Int32, currentTAB.TABsId, ParameterDirection.Input);
             var Name = new OracleParameter("Name", OracleDbType.NClob, NameTextBox.Text, ParameterDirection.Input);
             var Author = new OracleParameter("Author", OracleDbType.NClob, AuthorTextBox.Text, ParameterDirection.Input);
-            var Note = new OracleParameter("Note", OracleDbType.Blob, image, ParameterDirection.Input);
+            var TAB = new OracleParameter("TAB", OracleDbType.Blob, image, ParameterDirection.Input);
             var Description = new OracleParameter("Description", OracleDbType.NClob, DescriptionEditor.Text, ParameterDirection.Input);
-            var sql = "BEGIN NOTESUPDATE(:NotesId, :Name, :Author, :Note, :Description); END;";
-            var update = db.Database.ExecuteSqlCommand(sql, NotesId, Name, Author, Note, Description);
+            var sql = "BEGIN TABSUPDATE(:TABsId, :Name, :Author, :TAB, :Description); END;";
+            var update = db.Database.ExecuteSqlCommand(sql, TABsId, Name, Author, TAB, Description);
         }
     }
 }

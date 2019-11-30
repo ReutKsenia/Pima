@@ -154,5 +154,29 @@ DELETE FROM "NotesUser" WHERE "NotesUser"."NotesUserId" = p_noteid;
 COMMIT;
 END;
 
+----------------------------------------------------------TABsUpdate---------------------------------------------------------
+--DROP PROCEDURE TABSUPDATE;
+CREATE OR REPLACE PROCEDURE TABSUPDATE(p_tabid IN "TABs"."TABsId"%TYPE,
+                                        p_name IN "TABs"."Name"%TYPE, 
+                                        p_author IN "TABs"."Author"%TYPE,
+                                        p_tab IN "TABs"."TAB"%TYPE,
+                                        p_descrip IN "TABs"."Description"%TYPE
+                                        ) IS
+BEGIN
+UPDATE "TABs" SET "TABs"."Name" = p_name, "TABs"."Author" = p_author, "TABs"."TAB" = p_tab, "TABs"."Description" = p_descrip
+             WHERE "TABs"."TABsId" = p_tabid;
+COMMIT;
+END;
+
+----------------------------------------------------------TABsDelete---------------------------------------------------------
+--DROP PROCEDURE TABSDELETE;
+CREATE OR REPLACE PROCEDURE TABSDELETE(p_tabsid IN "TABs"."TABsId"%TYPE) IS
+BEGIN
+DELETE FROM "TABs" WHERE "TABs"."TABsId" = p_tabsid;
+DELETE FROM "TABsUser" WHERE "TABsUser"."TABsId_TABsUser"= p_tabsid;
+COMMIT;
+END;
+
+
 
 

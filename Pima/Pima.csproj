@@ -135,6 +135,9 @@
     <Compile Include="View\Pages\SharedPages\OneNote.xaml.cs">
       <DependentUpon>OneNote.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\SharedPages\OneTAB.xaml.cs">
+      <DependentUpon>OneTAB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\SharedPages\SongsPage.xaml.cs">
       <DependentUpon>SongsPage.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,9 @@
     </Compile>
     <Compile Include="View\Pages\UserPages\FavoritesNotes.xaml.cs">
       <DependentUpon>FavoritesNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\UserPages\FavoritesTABs.xaml.cs">
+      <DependentUpon>FavoritesTABs.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\UserPages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
@@ -199,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\SharedPages\OneTAB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\SharedPages\SongsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\UserPages\FavoritesNotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\UserPages\FavoritesTABs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -47,11 +47,11 @@ namespace Pima.View.Pages.SharedPages
                 one.Author.Text = currentNote.Author;
                 if (currentNote.Note != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 if(currentNote.Description != null)
                 {
@@ -70,11 +70,11 @@ namespace Pima.View.Pages.SharedPages
                 one.Author.Text = currentNote.Author;
                 if (currentNote.Note != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 if (currentNote.Description != null)
                 {
@@ -93,11 +93,11 @@ namespace Pima.View.Pages.SharedPages
                 one.Author.Text = currentNote.Author;
                 if (currentNote.Note != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 if (currentNote.Description != null)
                 {
@@ -120,11 +120,11 @@ namespace Pima.View.Pages.SharedPages
             one.Author.Text = currentNote.Author;
             if (currentNote.Note != null)
             {
-                one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
+                one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentNote.Note);
             }
             else
             {
-                one.Image.Visibility = Visibility.Collapsed;
+                one.Source.Visibility = Visibility.Collapsed;
             }
             if (currentNote.Description != null)
             {
