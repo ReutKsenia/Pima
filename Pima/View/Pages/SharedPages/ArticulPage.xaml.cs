@@ -40,13 +40,14 @@ namespace Pima.View.Pages.SharedPages
         private void ArticleCard_OpenArticleMouseClick(object sender, RoutedEventArgs e)
         {
             var currentArticle = (Article)((Button)sender).Tag;
-
+            OneArticle.articleId = currentArticle.ArticleId;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
             if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "AnonimPage"))
             {
                 OneArticle one = new OneArticle();
                 one.Title.Text = currentArticle.Title;
                 one.Text.Text = currentArticle.Text;
+                
                 if(currentArticle.Image != null)
                 {
                     one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
@@ -153,6 +154,7 @@ namespace Pima.View.Pages.SharedPages
         {
             var currentArticle = (Article)((Button)sender).Tag;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
+            OneArticle.articleId = currentArticle.ArticleId;
             OneArticle one = new OneArticle();
             one.Title.Text = currentArticle.Title;
             one.Text.Text = currentArticle.Text;
@@ -181,7 +183,7 @@ namespace Pima.View.Pages.SharedPages
 
             one.NewImage.Visibility = Visibility.Visible;
 
-            one.ID.Content = currentArticle.ArticleId.ToString();
+            //one.ID.Content = currentArticle.ArticleId.ToString();
         }
 
         private void Add_DeleteArticleMouseClick(object sender, RoutedEventArgs e)

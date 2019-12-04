@@ -139,6 +139,11 @@
                 Name="CurrentPage"
                 NavigationUIVisibility="Hidden"
                 Content="{Binding CurrentPage}"/>
+            <materialDesign:Snackbar IsActive="False"  x:Name="SnackBar" HorizontalAlignment="Stretch" 
+                                     VerticalContentAlignment="Stretch">
+                <materialDesign:SnackbarMessage  FontSize="25" Width="Auto" ActionContent="OK" 
+                                               x:Name="SnackBarMessage" ActionClick="SnackbarMessage_ActionClick"/>
+            </materialDesign:Snackbar>
         </StackPanel>
     </Grid>
 </Page>

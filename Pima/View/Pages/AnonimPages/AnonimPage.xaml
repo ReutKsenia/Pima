@@ -88,6 +88,7 @@
                     Orientation="Horizontal"
                     Margin="0,0,0,10">
                     <RadioButton
+                        x:Name="ArticeButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="100,0,150,0"
                         IsChecked="False"
@@ -127,9 +128,61 @@
                         FontFamily="{DynamicResource BaseFont}"
                         FontSize="{DynamicResource H2}"
                         Command="{Binding TABsPage_Click}"/>
-                    <Grid
+                    <materialDesign:PopupBox Width="295" IsPopupOpen="False" x:Name="popupSearch">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="295">
+                                <TextBox
+                                    Padding="5,0,0,0"
+                                    Width="260"
+                                    materialDesign:HintAssist.Hint="Поиск"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    BorderThickness="0"
+                                    MinWidth="200" 
+                                    Foreground="{DynamicResource DarkBrush}"
+                                    FontSize="{DynamicResource Regular}"
+                                    Background="White"
+                                    x:Name="Search" 
+                                    TextChanged="Search_TextChanged"
+                                    PreviewMouseUp="Search_PreviewMouseDown" HorizontalAlignment="Left"/>
+                                <materialDesign:PackIcon 
+                                    Kind="Magnify" 
+                                    Foreground="White" 
+                                    Width="25" Height="25" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0 0 5 0" 
+                                    FontFamily="Xfinity" 
+                                    PreviewMouseDown="LogoName_PreviewMouseDown"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <ScrollViewer Width="265" Height="150">
+                                <ItemsControl x:Name="SearchResult">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <!--<ColumnDefinition Width="100"/>-->
+                                                </Grid.ColumnDefinitions>
+                                                <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding Image}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                <TextBlock Text="{Binding Title}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                    <!--<Grid
                         Margin="55,0,0,0"
                         Background="{DynamicResource LightBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="23*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition
                                 Width="Auto" />
@@ -139,7 +192,7 @@
                                 Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Button
-                            Style="{DynamicResource MaterialDesignToolButton}">
+                            Style="{DynamicResource MaterialDesignToolButton}" Grid.RowSpan="2">
                             <materialDesign:PackIcon
                                 Kind="Magnify"
                                 Opacity=".56" 
@@ -147,16 +200,16 @@
                         </Button>
                         <TextBox
                             Grid.Column="1"
-                            Margin="8 0 0 0"
+                            Margin="8,1,0,1"
                             materialDesign:HintAssist.Hint="Поиск"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
                             MinWidth="200"
                             VerticalAlignment="Center" 
                             Foreground="{DynamicResource DarkBrush}"
-                            FontSize="{DynamicResource Regular}"/>
+                            FontSize="{DynamicResource Regular}" Grid.RowSpan="2"/>
 
-                    </Grid>
+                    </Grid>-->
                 </StackPanel>
             </materialDesign:ColorZone>
             <Frame

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pima.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,59 @@ namespace Pima.View.UserControls
     {
         public ChordCard()
         {
+            
+            
             InitializeComponent();
+        }
+
+        public event RoutedEventHandler DeleteChordMouseClick;
+        public event RoutedEventHandler UpdateChordMouseClick;
+        public event RoutedEventHandler AddChordMouseClick;
+
+
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
+            if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "AnonimPage"))
+            {
+                //Add.Visibility = Visibility.Collapsed;
+                Panel.Visibility = Visibility.Collapsed;
+                Tresh.Visibility = Visibility.Collapsed;
+                Pen.Visibility = Visibility.Collapsed;
+            }
+            else if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "UserPage"))
+            {
+                //Add.Visibility = Visibility.Collapsed;
+                Panel.Visibility = Visibility.Collapsed;
+                Tresh.Visibility = Visibility.Collapsed;
+                Pen.Visibility = Visibility.Collapsed;
+            }
+            else if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "AdminPage"))
+            {
+                //Add.Visibility = Visibility.Collapsed;
+                Panel.Visibility = Visibility.Visible;
+                Tresh.Visibility = Visibility.Visible;
+                Pen.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void AddChord_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddChordMouseClick != null)
+                AddChordMouseClick(sender, e);
+        }
+
+        private void Pen_Click(object sender, RoutedEventArgs e)
+        {
+            if (UpdateChordMouseClick != null)
+                UpdateChordMouseClick(sender, e);
+        }
+
+        private void Tresh_Click(object sender, RoutedEventArgs e)
+        {
+            if (DeleteChordMouseClick != null)
+                DeleteChordMouseClick(sender, e);
         }
     }
 }

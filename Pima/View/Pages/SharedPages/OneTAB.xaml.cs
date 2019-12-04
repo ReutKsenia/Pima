@@ -51,9 +51,17 @@ namespace Pima.View.Pages.SharedPages
             byte[] image = null;
             int id = Int32.Parse(ID.Content.ToString());  //костыль))
             var currentTAB = db.TABs.FirstOrDefault(x => x.TABsId == id);
-            if (Source.Source != null)
+            if (currentTAB.TAB == null && Source.Source != null && nameTAB != null)
             {
                 image = Converter.ConvertImageToByteArray(nameTAB);
+            }
+            else if (currentTAB.TAB != null && Source.Source != null && nameTAB != null)
+            {
+                image = Converter.ConvertImageToByteArray(nameTAB);
+            }
+            else
+            {
+                image = currentTAB.TAB;
             }
 
             var TABsId = new OracleParameter("TABsId", OracleDbType.Int32, currentTAB.TABsId, ParameterDirection.Input);

@@ -1,4 +1,5 @@
-﻿using Pima.View.Pages.AnonimPages;
+﻿using MaterialDesignThemes.Wpf;
+using Pima.View.Pages.AnonimPages;
 using Pima.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,17 @@ namespace Pima.View.Pages.AdminPages
     /// </summary>
     public partial class AdminPage : Page
     {
+        public static Snackbar Snackbar;
+        public static SnackbarMessage SnackbarMessage;
+
         AdminPageViewModel context = new AdminPageViewModel();
         public AdminPage()
         {
             InitializeComponent();
             DataContext = context;
+
+            Snackbar = SnackBar;
+            SnackbarMessage = SnackBarMessage;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,6 +51,11 @@ namespace Pima.View.Pages.AdminPages
                     (window as MainWindow).CurrentPage.Navigate(anonim);
                 }
             }
+        }
+
+        private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
+        {
+            SnackBar.IsActive = false;
         }
     }
 }

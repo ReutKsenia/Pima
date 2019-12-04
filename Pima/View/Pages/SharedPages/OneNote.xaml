@@ -117,7 +117,8 @@
                     FontFamily="{DynamicResource BaseFont}"
                     FontSize="{DynamicResource Regular}"
                     TextWrapping="Wrap"
-                    Text="Description"/>
+                    Text="Description"
+                    />
                 <TextBox
                     Margin="15,5,5,5"
                     x:FieldModifier="public"
@@ -126,7 +127,8 @@
                     FontSize="{DynamicResource Regular}"
                     Text="{Binding ElementName=Description,Path=Text}"
                     Visibility="Collapsed"
-                    TextWrapping="Wrap"/>
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

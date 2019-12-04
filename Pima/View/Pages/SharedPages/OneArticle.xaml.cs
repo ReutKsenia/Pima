@@ -26,6 +26,7 @@ namespace Pima.View.Pages.SharedPages
     public partial class OneArticle : Page
     {
         private string nameImage;
+        public static int articleId;
         public OneArticle()
         {
             InitializeComponent();
@@ -47,10 +48,22 @@ namespace Pima.View.Pages.SharedPages
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            byte[] image = null;
             OracleDbContext db = new OracleDbContext();
-            int id = Int32.Parse(ID.Content.ToString());  //костыль))
-            var currentArticle = db.Articles.FirstOrDefault(x => x.ArticleId == id);
-            byte[] image = Converter.ConvertImageToByteArray(nameImage);
+            //int id = Int32.Parse(ID.Content.ToString());  //костыль))
+            var currentArticle = db.Articles.FirstOrDefault(x => x.ArticleId == articleId);
+            if (currentArticle.Image == null && Source.ImageSource != null && nameImage != null)
+            {
+                image = Converter.ConvertImageToByteArray(nameImage);
+            }
+            else if (currentArticle.Image != null && Source.ImageSource != null && nameImage != null)
+            {
+                image = Converter.ConvertImageToByteArray(nameImage);
+            }
+            else
+            {
+                image = currentArticle.Image;
+            }
 
             var ArticleId = new OracleParameter("ArticleId", OracleDbType.Int32, currentArticle.ArticleId , ParameterDirection.Input);
             var Title = new OracleParameter("Title", OracleDbType.NClob, TitleTextBox.Text, ParameterDirection.Input);

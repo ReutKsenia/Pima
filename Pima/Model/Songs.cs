@@ -23,6 +23,8 @@ namespace Pima.Model
 
         public byte[] Music { get; set; }
 
+        public byte[] Image { get; set; }
+
         public string Description { get; set; }
 
         public virtual ICollection<ChordsSong> ChordsSongs { get; set; }

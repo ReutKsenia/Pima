@@ -101,7 +101,8 @@
                     FontSize="{DynamicResource Regular}"
                     Text="{Binding ElementName=Text,Path=Text}"
                     Visibility="Collapsed"
-                    TextWrapping="Wrap"/>
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

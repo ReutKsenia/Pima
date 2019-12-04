@@ -177,6 +177,85 @@ DELETE FROM "TABsUser" WHERE "TABsUser"."TABsId_TABsUser"= p_tabsid;
 COMMIT;
 END;
 
+----------------------------------------------------------AddTABsUser-------------------------------------------------------
+--DROP PROCEDURE ADDTABSUSER;
+create or replace PROCEDURE ADDTABSUSER (p_userid IN "User"."UserId"%TYPE, 
+                                          p_tabsid IN "TABs"."TABsId"%TYPE
+                                          ) IS
+BEGIN
+    INSERT INTO "TABsUser"("UserId_TABsUser", "TABsId_TABsUser") VALUES (p_userid, p_tabsid);
+    COMMIT;
+END;
 
+----------------------------------------------------------TABsUserDelete---------------------------------------------------------
+--DROP PROCEDURE TABSUSERDELETE;
+create or replace PROCEDURE TABSUSERDELETE(p_tabid IN "TABsUser"."TABsUserId"%TYPE
+                                              ) IS
+BEGIN
+DELETE FROM "TABsUser" WHERE "TABsUser"."TABsUserId" = p_tabid;
+COMMIT;
+END;
 
+----------------------------------------------------------ChordDelete---------------------------------------------------------
+--DROP PROCEDURE CHORDDELETE;
+CREATE OR REPLACE PROCEDURE CHORDDELETE(p_chordid IN "Chords"."ChordsId"%TYPE) IS
+BEGIN
+DELETE FROM "Chords" WHERE "Chords"."ChordsId" = p_chordid;
+DELETE FROM "ChordsSong" WHERE "ChordsSong"."ChordId_ChordsSong"=p_chordid;
+COMMIT;
+END;
+
+----------------------------------------------------------ChordsUpdate---------------------------------------------------------
+--DROP PROCEDURE CHORDSUPDATE;
+CREATE OR REPLACE PROCEDURE CHORDSUPDATE(p_chordsid IN "Chords"."ChordsId"%TYPE,
+                                        p_name IN "Chords"."Name"%TYPE, 
+                                        p_chord IN "Chords"."Chord"%TYPE
+                                        ) IS
+BEGIN
+UPDATE "Chords" SET "Chords"."Name" = p_name, "Chords"."Chord" = p_chord WHERE "Chords"."ChordsId" = p_chordsid;
+COMMIT;
+END;
+
+----------------------------------------------------------SongsDelete---------------------------------------------------------
+--DROP PROCEDURE SONGSDELETE;
+CREATE OR REPLACE PROCEDURE SONGSDELETE(p_songsid IN "Songs"."SongsId"%TYPE) IS
+BEGIN
+DELETE FROM "Songs" WHERE "Songs"."SongsId" = p_songsid;
+DELETE FROM "SongsUser" WHERE "SongsUser"."SongId_SongsUser"= p_songsid;
+COMMIT;
+END;
+
+----------------------------------------------------------AddSongsUser-------------------------------------------------------
+--DROP PROCEDURE ADDSONGSUSER;
+create or replace PROCEDURE ADDSONGSUSER (p_userid IN "User"."UserId"%TYPE, 
+                                          p_songsid IN "Songs"."SongsId"%TYPE
+                                          ) IS
+BEGIN
+    INSERT INTO "SongsUser"("UserId_SongsUser", "SongId_SongsUser") VALUES (p_userid, p_songsid);
+    COMMIT;
+END;
+
+----------------------------------------------------------SongsUpdate---------------------------------------------------------
+--DROP PROCEDURE SONGSUPDATE;
+CREATE OR REPLACE PROCEDURE SONGSUPDATE(p_songsid IN "Songs"."SongsId"%TYPE,
+                                        p_name IN "Songs"."Name"%TYPE, 
+                                        p_author IN "Songs"."Author"%TYPE,
+                                        p_music IN "Songs"."Music"%TYPE,
+                                        p_image IN "Songs"."Image"%TYPE,
+                                        p_descrip IN "Songs"."Description"%TYPE
+                                        ) IS
+BEGIN
+UPDATE "Songs" SET "Songs"."Name" = p_name, "Songs"."Author" = p_author, "Songs"."Music" = p_music, "Songs"."Image" = p_image, "Songs"."Description" = p_descrip
+             WHERE "Songs"."SongsId" = p_songsid;
+COMMIT;
+END;
+
+----------------------------------------------------------ChordSongDelete---------------------------------------------------------
+--DROP PROCEDURE CHORDSONGDELETE;
+create or replace PROCEDURE CHORDSONGDELETE(p_id IN "ChordsSong"."Id"%TYPE
+                                              ) IS
+BEGIN
+DELETE FROM "ChordsSong" WHERE "ChordsSong"."Id" = p_id;
+COMMIT;
+END;
 

@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201911221655343_First.Designer.cs">
       <DependentUpon>201911221655343_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912031719386_Second.cs" />
+    <Compile Include="Migrations\201912031719386_Second.Designer.cs">
+      <DependentUpon>201912031719386_Second.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ArticlesUser.cs" />
@@ -132,8 +136,14 @@
     <Compile Include="View\Pages\SharedPages\OneArticle.xaml.cs">
       <DependentUpon>OneArticle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\SharedPages\OneChord.xaml.cs">
+      <DependentUpon>OneChord.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\SharedPages\OneNote.xaml.cs">
       <DependentUpon>OneNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\SharedPages\OneSong.xaml.cs">
+      <DependentUpon>OneSong.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\SharedPages\OneTAB.xaml.cs">
       <DependentUpon>OneTAB.xaml</DependentUpon>
@@ -161,6 +171,9 @@
     </Compile>
     <Compile Include="View\UserControls\ChordCard.xaml.cs">
       <DependentUpon>ChordCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\ChordSongCard.xaml.cs">
+      <DependentUpon>ChordSongCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\NotesCard.xaml.cs">
       <DependentUpon>NotesCard.xaml</DependentUpon>
@@ -201,7 +214,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\SharedPages\OneChord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\SharedPages\OneNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SharedPages\OneSong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\ChordCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\ChordSongCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,6 +335,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201911221655343_First.resx">
       <DependentUpon>201911221655343_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912031719386_Second.resx">
+      <DependentUpon>201912031719386_Second.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

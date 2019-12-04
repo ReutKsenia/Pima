@@ -21,17 +21,17 @@ using System.Windows.Shapes;
 namespace Pima.View.Pages.SharedPages
 {
     /// <summary>
-    /// Логика взаимодействия для OneNote.xaml
+    /// Логика взаимодействия для OneChord.xaml
     /// </summary>
-    public partial class OneNote : Page
+    public partial class OneChord : Page
     {
         private string nameNote;
-        public OneNote()
+        public OneChord()
         {
             InitializeComponent();
         }
 
-        private void NewNote_Click(object sender, RoutedEventArgs e)
+        private void NewImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.InitialDirectory = "";
@@ -50,27 +50,25 @@ namespace Pima.View.Pages.SharedPages
             OracleDbContext db = new OracleDbContext();
             byte[] image = null;
             int id = Int32.Parse(ID.Content.ToString());  //костыль))
-            var currentNote = db.Notes.FirstOrDefault(x => x.NotesId == id);
-            if (currentNote.Note == null && Source.Source != null && nameNote != null)
+            var currentChord = db.Chords.FirstOrDefault(x => x.ChordsId == id);
+            if (currentChord.Chord == null && Source.Source != null && nameNote != null)
             {
                 image = Converter.ConvertImageToByteArray(nameNote);
             }
-            else if (currentNote.Note != null && Source.Source != null && nameNote != null)
+            else if(currentChord.Chord != null && Source.Source != null && nameNote != null)
             {
                 image = Converter.ConvertImageToByteArray(nameNote);
             }
             else
             {
-                image = currentNote.Note;
+                image = currentChord.Chord;
             }
 
-            var NotesId = new OracleParameter("NotesId", OracleDbType.Int32, currentNote.NotesId, ParameterDirection.Input);
+            var ChordsId = new OracleParameter("ChordsId", OracleDbType.Int32, currentChord.ChordsId, ParameterDirection.Input);
             var Name = new OracleParameter("Name", OracleDbType.NClob, NameTextBox.Text, ParameterDirection.Input);
-            var Author = new OracleParameter("Author", OracleDbType.NClob, AuthorTextBox.Text, ParameterDirection.Input);
-            var Note = new OracleParameter("Note", OracleDbType.Blob, image, ParameterDirection.Input);
-            var Description = new OracleParameter("Description", OracleDbType.NClob, DescriptionEditor.Text, ParameterDirection.Input);
-            var sql = "BEGIN NOTESUPDATE(:NotesId, :Name, :Author, :Note, :Description); END;";
-            var update = db.Database.ExecuteSqlCommand(sql, NotesId, Name, Author, Note, Description);
+            var Chord = new OracleParameter("Note", OracleDbType.Blob, image, ParameterDirection.Input);
+            var sql = "BEGIN CHORDSUPDATE(:ChordsId, :Name, :Chord); END;";
+            var update = db.Database.ExecuteSqlCommand(sql, ChordsId, Name, Chord);
         }
     }
 }
