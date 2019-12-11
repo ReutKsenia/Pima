@@ -22,11 +22,11 @@ using System.Windows.Shapes;
 namespace Pima.View.Pages.UserPages
 {
     /// <summary>
-    /// Логика взаимодействия для FavoritesNotes.xaml
+    /// Логика взаимодействия для FavoritesSongs.xaml
     /// </summary>
-    public partial class FavoritesNotes : Page
+    public partial class FavoritesSongs : Page
     {
-        public FavoritesNotes()
+        public FavoritesSongs()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace Pima.View.Pages.UserPages
         {
             OracleDbContext db = new OracleDbContext();
             int UserId = CurrentUser.User.UserId;
-            var note = db.NotesUsers.Where(x => x.UserId_NotesUser == UserId);
+            var note = db.SongsUsers.Where(x => x.UserId_SongsUser == UserId);
 
             SearchResultList.ItemsSource = note.ToList();
         }
@@ -43,43 +43,52 @@ namespace Pima.View.Pages.UserPages
         private void Tresh_Click(object sender, RoutedEventArgs e)
         {
             OracleDbContext db = new OracleDbContext();
-            var currentNote = (NotesUser)((Button)sender).Tag;
-            var NotesUserId = new OracleParameter("NotesUserId", OracleDbType.Int32, currentNote.NotesUserId, ParameterDirection.Input);
-            var sql = "BEGIN NOTESUSERDELETE(:NotesUserId); END;";
-            var update = db.Database.ExecuteSqlCommand(sql, NotesUserId);
-            db.Notes.Load();
+            var currentSong = (SongsUser)((Button)sender).Tag;
+            var SongsUserId = new OracleParameter("SongsUserId", OracleDbType.Int32, currentSong.SongsUserId , ParameterDirection.Input);
+            var sql = "BEGIN SONGSUSERDELETE(:SongsUserId); END;";
+            var update = db.Database.ExecuteSqlCommand(sql, SongsUserId);
+            db.Songs.Load();
             int UserId = CurrentUser.User.UserId;
-            var note = db.NotesUsers.Where(x => x.UserId_NotesUser == UserId);
+            var song = db.SongsUsers.Where(x => x.UserId_SongsUser == UserId);
 
-            SearchResultList.ItemsSource = note.ToList();
+            SearchResultList.ItemsSource = song.ToList();
         }
 
         private void OpenNote_Click(object sender, RoutedEventArgs e)
         {
             OracleDbContext db = new OracleDbContext();
             int UserId = CurrentUser.User.UserId;
-            var currentNote = (NotesUser)((Button)sender).Tag;
-            var note = db.Notes.FirstOrDefault(x => x.NotesId == currentNote.NotesId_NotesUser);
-            
+            var currentSong = (SongsUser)((Button)sender).Tag;
+            var song = db.Songs.FirstOrDefault(x => x.SongsId == currentSong.SongId_SongsUser);
+            OneSong.songID = song.SongsId;
+            SongsPage.musicID = song.SongsId;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
             if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "UserPage"))
             {
-                OneNote one = new OneNote();
-                one.Name.Text = note.Name;
-                one.Author.Text = note.Author;
-                //one.ChordsComboBox.Visibility = Visibility.Collapsed;
-
-                if (note.Note != null)
+                OneSong one = new OneSong();
+                one.Name.Text = song.Name;
+                one.Author.Text = song.Author;
+                one.Text.Text = song.Text;
+                one.ChordsComboBox.Visibility = Visibility.Collapsed;
+                if (song.Music != null)
                 {
-                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(note.Note);
+                    one.Music.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    one.Music.Visibility = Visibility.Collapsed;
+                }
+                if (song.Image != null)
+                {
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(song.Image);
                 }
                 else
                 {
                     one.Source.Visibility = Visibility.Collapsed;
                 }
-                if (note.Description != null)
+                if (song.Description != null)
                 {
-                    one.Description.Text = note.Description;
+                    one.Description.Text = song.Description;
                 }
                 else
                 {

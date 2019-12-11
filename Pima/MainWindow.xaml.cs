@@ -1,4 +1,5 @@
-﻿using Pima.View.Pages.UserPages;
+﻿using MaterialDesignThemes.Wpf;
+using Pima.View.Pages.UserPages;
 using Pima.View.Windows;
 using Pima.ViewModel.Windows;
 using System;
@@ -21,10 +22,19 @@ namespace Pima
     public partial class MainWindow : Window
     {
         MainViewModel main = new MainViewModel();
+        public static Snackbar Snackbar;
+        public static SnackbarMessage SnackbarMessage;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = main;
+            Snackbar = SnackBar;
+            SnackbarMessage = SnackBarMessage;
+        }
+
+        private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
+        {
+            SnackBar.IsActive = false;
         }
     }
 }

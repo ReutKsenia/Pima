@@ -105,6 +105,7 @@
                     Orientation="Horizontal"
                     Margin="0,0,0,10">
                     <RadioButton
+                        x:Name="ArticleButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="100,0,150,0"
                         IsChecked="False"
@@ -113,6 +114,7 @@
                         FontSize="{DynamicResource H2}" FontWeight="Normal"
                         Command="{Binding ArticlePage_Click}"/>
                     <RadioButton
+                        x:Name="NoteButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="0,0,150,0"
                         IsChecked="False"
@@ -121,6 +123,7 @@
                         FontSize="{DynamicResource H2}" FontWeight="Normal"
                         Command="{Binding NotesPage_Click}"/>
                     <RadioButton
+                        x:Name="SongButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="0,0,150,0"
                         IsChecked="False"
@@ -130,6 +133,8 @@
                         FontWeight="Normal"
                         Command="{Binding SongsPage_Click}"/>
                     <RadioButton
+                        Height="40"
+                        x:Name="ChordButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="0,0,150,0"
                         IsChecked="False"
@@ -138,6 +143,7 @@
                         FontSize="{DynamicResource H2}" FontWeight="Normal"
                         Command="{Binding ChordsPage_Click}"/>
                     <RadioButton
+                        x:Name="TABButton"
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="0,0,50,0"
                         IsChecked="False"
@@ -145,36 +151,126 @@
                         FontFamily="{DynamicResource BaseFont}"
                         FontSize="{DynamicResource H2}" FontWeight="Normal"
                         Command="{Binding TABsPage_Click}"/>
-                    <Grid
-                        Margin="55,0,0,0"
-                        Background="{DynamicResource LightBrush}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition
-                                Width="Auto" />
-                            <ColumnDefinition
-                                Width="*" />
-                            <ColumnDefinition
-                                Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Button
-                            Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon
-                                Kind="Magnify"
-                                Opacity=".56" 
-                                Foreground="{DynamicResource MediumBaseBrush}"/>
-                        </Button>
-                        <TextBox
-                            Grid.Column="1"
-                            Margin="8 0 0 0"
-                            materialDesign:HintAssist.Hint="Поиск"
-                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                            BorderThickness="0"
-                            MinWidth="200"
-                            VerticalAlignment="Center" 
-                            Foreground="{DynamicResource DarkBrush}"
-                            FontSize="{DynamicResource Regular}"/>
+                    <materialDesign:PopupBox Width="295" IsPopupOpen="False" x:Name="popupSearch">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="295">
+                                <TextBox
+                                    Padding="5,0,0,0"
+                                    Width="260"
+                                    materialDesign:HintAssist.Hint="Поиск"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                    BorderThickness="0"
+                                    MinWidth="200" 
+                                    Foreground="{DynamicResource DarkBrush}"
+                                    FontSize="{DynamicResource Regular}"
+                                    Background="White"
+                                    x:Name="Search" 
+                                    TextChanged="Search_TextChanged"
+                                    PreviewMouseUp="Search_PreviewMouseDown" HorizontalAlignment="Left"/>
+                                <materialDesign:PackIcon 
+                                    Kind="Magnify" 
+                                    Foreground="White" 
+                                    Width="25" Height="25" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0 0 5 0" 
+                                    FontFamily="Xfinity" 
+                                    PreviewMouseDown="LogoName_PreviewMouseDown"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <ScrollViewer Width="265" Height="150">
+                                <StackPanel>
+                                    <ItemsControl
+                                        Visibility="Collapsed"
+                                        x:Name="SearchResultArticle">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
 
-                    </Grid>
+                                                <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="1*"/>
+
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding Image}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                    <TextBlock Text="{Binding Title}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                </Grid>
+
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl 
+                                    Visibility="Collapsed"
+                                    x:Name="SearchResultNote">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding Note}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                    <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl 
+                                    Visibility="Collapsed"
+                                    x:Name="SearchResultSong">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding Image}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                    <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl 
+                                    Visibility="Collapsed"
+                                    x:Name="SearchResultTAB">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding TAB}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                    <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl 
+                                    Visibility="Collapsed"
+                                    x:Name="SearchResultChords">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid x:Name="GridResult" Tag="{Binding}" PreviewMouseDown="GridResult_PreviewMouseDown">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="50" Height="50" HorizontalAlignment="Center" x:Name="Image"  VerticalAlignment="Center" Source="{Binding Chord}" Grid.Column="0" Margin="5 0 5 0"/>
+                                                    <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource BaseFont}" FontSize="{DynamicResource H1}" Margin="5 0 5 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
                 </StackPanel>
             </materialDesign:ColorZone>
             <Frame
@@ -267,9 +363,10 @@
                     </ListViewItem>
                     <ListViewItem Height="45" Padding="0">
                         <Button
+                            x:Name="MySongs"
                             Width="250"
                             Height="40"
-                            Template="{DynamicResource ButtonMenu}">
+                            Template="{DynamicResource ButtonMenu}" Click="MySongs_Click">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <materialDesign:PackIcon Kind="Audio" Width="20" Height="20" Foreground="#FF0C9334" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock 
@@ -302,9 +399,10 @@
                     </ListViewItem>
                     <ListViewItem Height="45" Padding="0">
                         <Button
+                            x:Name="MyDemo"
                             Width="250"
                             Height="40"
-                            Template="{DynamicResource ButtonMenu}">
+                            Template="{DynamicResource ButtonMenu}" Click="MyDemo_Click">
                             <StackPanel Orientation="Horizontal" Margin="10 0">
                                 <materialDesign:PackIcon Kind="StarCircle" Width="20" Height="20" Foreground="#FFE6A701" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock 
@@ -334,26 +432,7 @@
                             </StackPanel>
                         </Button>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
-                        <Button
-                            Width="250"
-                            Height="40"
-                            Template="{DynamicResource ButtonMenu}">
-                            <StackPanel Orientation="Horizontal" Margin="10 0">
-                                <materialDesign:PackIcon Kind="HelpCircleOutline" Width="20" Height="20" Foreground="#FFF08033" Margin="5" VerticalAlignment="Center"/>
-                                <TextBlock 
-                                    Text="Помощь" 
-                                    Margin="10"
-                                    FontFamily="{DynamicResource BaseFont}"
-                                    FontSize="18"
-                                    Foreground="#FF313131" 
-                                    FontWeight="Normal"/>
-                            </StackPanel>
-                        </Button>
-                    </ListViewItem>
                 </ListView>
-
-
             </StackPanel>
             <Button x:Name="ButtonClose" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0">
                 <materialDesign:PackIcon Kind="Close" Foreground="{DynamicResource MediumBaseBrush}"/>

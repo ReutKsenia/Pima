@@ -71,11 +71,11 @@ namespace Pima.View.Pages.UserPages
                 one.Text.Text = art.Text;
                 if (art.Image != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(art.Image);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(art.Image);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 (currentPage as UserPages.UserPage).CurrentPage.Navigate(one);
             }

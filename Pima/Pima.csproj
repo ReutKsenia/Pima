@@ -59,6 +59,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\..\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
@@ -99,11 +102,16 @@
     <Compile Include="Migrations\201912031719386_Second.Designer.cs">
       <DependentUpon>201912031719386_Second.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912070909001_Demo.cs" />
+    <Compile Include="Migrations\201912070909001_Demo.Designer.cs">
+      <DependentUpon>201912070909001_Demo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ArticlesUser.cs" />
     <Compile Include="Model\Chords.cs" />
     <Compile Include="Model\ChordsSong.cs" />
+    <Compile Include="Model\Demo.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\NotesUser.cs" />
     <Compile Include="Model\Songs.cs" />
@@ -154,14 +162,23 @@
     <Compile Include="View\Pages\SharedPages\TABsPage.xaml.cs">
       <DependentUpon>TABsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\UserPages\DemoPage.xaml.cs">
+      <DependentUpon>DemoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\UserPages\FavoritesArticle.xaml.cs">
       <DependentUpon>FavoritesArticle.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\UserPages\FavoritesNotes.xaml.cs">
       <DependentUpon>FavoritesNotes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\UserPages\FavoritesSongs.xaml.cs">
+      <DependentUpon>FavoritesSongs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\UserPages\FavoritesTABs.xaml.cs">
       <DependentUpon>FavoritesTABs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\UserPages\PlayerPage.xaml.cs">
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\UserPages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
@@ -238,6 +255,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\UserPages\DemoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\UserPages\FavoritesArticle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,7 +267,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\UserPages\FavoritesSongs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\UserPages\FavoritesTABs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\UserPages\PlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912031719386_Second.resx">
       <DependentUpon>201912031719386_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070909001_Demo.resx">
+      <DependentUpon>201912070909001_Demo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

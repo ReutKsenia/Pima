@@ -38,7 +38,7 @@ namespace Pima.View.Pages.SharedPages
         private void Notes_OpenNoteMouseClick(object sender, RoutedEventArgs e)
         {
             var currentNote = (Notes)((Button)sender).Tag;
-
+            OneNote.articleId = currentNote.NotesId;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
             if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "AnonimPage"))
             {
@@ -115,6 +115,7 @@ namespace Pima.View.Pages.SharedPages
         {
             var currentNote = (Notes)((Button)sender).Tag;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
+            OneNote.articleId = currentNote.NotesId;
             OneNote one = new OneNote();
             one.Name.Text = currentNote.Name;
             one.Author.Text = currentNote.Author;
@@ -175,6 +176,9 @@ namespace Pima.View.Pages.SharedPages
             var UserId = new OracleParameter("UserId", OracleDbType.Int32, CurrentUser.User.UserId, ParameterDirection.Input);
             var sql = "BEGIN ADDNOTESUSER(:UserId, :NotesId); END;";
             var update = db.Database.ExecuteSqlCommand(sql, UserId, NotesId);
+
+            MainWindow.SnackbarMessage.Content = "Ноты добавлены!";
+            MainWindow.Snackbar.IsActive = true;
         }
 
         private void New_Click(object sender, RoutedEventArgs e)

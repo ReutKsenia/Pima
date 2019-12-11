@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Oracle.ManagedDataAccess.Client;
 using Pima.Model;
+using Pima.View.Pages.AdminPages;
 using Pima.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,8 @@ namespace Pima.View.Pages.SharedPages
             {
                 string selectedFileName = dlg.FileName;
                 nameImage = selectedFileName;
-                Source.ImageSource = new BitmapImage(new Uri(selectedFileName));
-                Image.Visibility = Visibility.Visible;
+                Source.Source = new BitmapImage(new Uri(selectedFileName));
+                Source.Visibility = Visibility.Visible;
             }
         }
 
@@ -50,13 +51,12 @@ namespace Pima.View.Pages.SharedPages
         {
             byte[] image = null;
             OracleDbContext db = new OracleDbContext();
-            //int id = Int32.Parse(ID.Content.ToString());  //костыль))
             var currentArticle = db.Articles.FirstOrDefault(x => x.ArticleId == articleId);
-            if (currentArticle.Image == null && Source.ImageSource != null && nameImage != null)
+            if (currentArticle.Image == null && Source.Source != null && nameImage != null)
             {
                 image = Converter.ConvertImageToByteArray(nameImage);
             }
-            else if (currentArticle.Image != null && Source.ImageSource != null && nameImage != null)
+            else if (currentArticle.Image != null && Source.Source != null && nameImage != null)
             {
                 image = Converter.ConvertImageToByteArray(nameImage);
             }
@@ -65,12 +65,15 @@ namespace Pima.View.Pages.SharedPages
                 image = currentArticle.Image;
             }
 
-            var ArticleId = new OracleParameter("ArticleId", OracleDbType.Int32, currentArticle.ArticleId , ParameterDirection.Input);
+            var ArticleId = new OracleParameter("ArticleId", OracleDbType.Int32, currentArticle.ArticleId, ParameterDirection.Input);
             var Title = new OracleParameter("Title", OracleDbType.NClob, TitleTextBox.Text, ParameterDirection.Input);
             var Text = new OracleParameter("Text", OracleDbType.NClob, TextEditor.Text, ParameterDirection.Input);
             var Image = new OracleParameter("Image", OracleDbType.Blob, image, ParameterDirection.Input);
             var sql = "BEGIN ARTICLEUPDATE(:ArticleId, :Title, :Text, :Image); END;";
             var update = db.Database.ExecuteSqlCommand(sql, ArticleId, Title, Text, Image);
+
+            MainWindow.SnackbarMessage.Content = "Данные сохранены!";
+            MainWindow.Snackbar.IsActive = true;
         }
     }
 }

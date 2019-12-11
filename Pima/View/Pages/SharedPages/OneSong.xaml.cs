@@ -33,7 +33,33 @@ namespace Pima.View.Pages.SharedPages
            
             InitializeComponent();
             ShowChord();
+            CreateFileMP3();
+            MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
         }
+        public static string CurrDir = Environment.CurrentDirectory;
+
+        public static void CreateFileMP3()
+        {
+            OracleDbContext db = new OracleDbContext();
+            byte[] bytes; // переменная массива байт
+            var select = db.Songs.Where(music => music.SongsId == SongsPage.musicID).FirstOrDefault(); // ищем файл, который хотим воспроизвести
+            if (select != null)
+            {
+
+                bytes = select.Music; // присваиваем массиву байт значение из бд
+                if (bytes != null)
+                {
+                    string File = "music.mp3"; // файл, который будет создаваться в текущей директории 
+                    string FullDirToFile = CurrDir + "\\" + File; // полный путь к файлу music.mp3 (его вначале нет, он создатся сам или перезапишется)
+                    using (FileStream fstream = new FileStream(FullDirToFile, FileMode.Create))
+                    {
+                        // запись массива байтов в файл
+                        fstream.Write(bytes, 0, bytes.Length);
+                    }
+                } 
+            }
+        }
+
         public void ShowChord()
         {
             OracleDbContext db = new OracleDbContext();
@@ -56,21 +82,20 @@ namespace Pima.View.Pages.SharedPages
             byte[] image = null;
             byte[] music = null;
             var currentSong = db.Songs.FirstOrDefault(x => x.SongsId == songID);
-            if (currentSong.Image == null && Source.Source != null && nameNote != null && currentSong.Music == null)
+            if ((currentSong.Image == null && Source.Source != null && nameNote != null && currentSong.Music == null) ||
+                (currentSong.Image != null && Source.Source != null && nameNote != null && currentSong.Music != null))
             {
                 image = Converter.ConvertImageToByteArray(nameNote);
                 FileStream fs = new FileStream(songPath, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs); // 
                 music = br.ReadBytes((Int32)fs.Length);
             }
-            else if (currentSong.Image != null && Source.Source != null && nameNote != null && currentSong.Music != null)
+            else if (currentSong.Image == null && Source.Source != null && nameNote != null && currentSong.Music != null)
             {
                 image = Converter.ConvertImageToByteArray(nameNote);
-                FileStream fs = new FileStream(songPath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs); // 
-                music = br.ReadBytes((Int32)fs.Length);
+                music = currentSong.Music;
             }
-            else if (currentSong.Image == null && Source.Source == null && nameNote == null && currentSong.Music == null)
+            else if (currentSong.Image != null && Source.Source != null && nameNote != null && currentSong.Music == null)
             {
                 image = currentSong.Image;
                 FileStream fs = new FileStream(songPath, FileMode.Open, FileAccess.Read);
@@ -88,9 +113,13 @@ namespace Pima.View.Pages.SharedPages
             var Author = new OracleParameter("Author", OracleDbType.NClob, AuthorTextBox.Text, ParameterDirection.Input);
             var Image = new OracleParameter("Image", OracleDbType.Blob, image, ParameterDirection.Input);
             var Music = new OracleParameter("Music", OracleDbType.Blob, music, ParameterDirection.Input);
+            var Text = new OracleParameter("Text", OracleDbType.NClob, TextEditor.Text, ParameterDirection.Input);
             var Description = new OracleParameter("Description", OracleDbType.NClob, DescriptionEditor.Text, ParameterDirection.Input);
-            var sql = "BEGIN SONGSUPDATE(:NotesId, :Name, :Author, :Muic, :Image, :Description); END;";
-            var update = db.Database.ExecuteSqlCommand(sql, SongsId, Name, Author, Music, Image, Description);
+            var sql = "BEGIN SONGSUPDATE(:NotesId, :Name, :Author, :Muic, :Image, :Text, :Description); END;";
+            var update = db.Database.ExecuteSqlCommand(sql, SongsId, Name, Author, Music, Image, Text, Description);
+
+            MainWindow.SnackbarMessage.Content = "Данные сохранены!";
+            MainWindow.Snackbar.IsActive = true;
         }
 
         private void AddMusic_Click(object sender, RoutedEventArgs e)
@@ -179,20 +208,23 @@ namespace Pima.View.Pages.SharedPages
 
         private void AddChordSong_Click(object sender, RoutedEventArgs e)
         {
-            Chord.DisplayMemberPath = "ChordsId";
-            OracleDbContext db = new OracleDbContext();
-            int CS = Convert.ToInt32(Chord.Text);
-            Model.ChordsSong chordsSong = new ChordsSong()
+            if(Chord.Text != null)
             {
-                SongId_ChordsSong = songID,
-                ChordId_ChordsSong = CS
-            };
-            db.ChordsSongs.Add(chordsSong);
-            db.SaveChanges();
-            Chord.DisplayMemberPath = "Name";
-            MessageBox.Show("Good");
-            ShowChord();
-
+                Chord.DisplayMemberPath = "ChordsId";
+                OracleDbContext db = new OracleDbContext();
+                int CS = Convert.ToInt32(Chord.Text);
+                Model.ChordsSong chordsSong = new ChordsSong()
+                {
+                    SongId_ChordsSong = songID,
+                    ChordId_ChordsSong = CS
+                };
+                db.ChordsSongs.Add(chordsSong);
+                db.SaveChanges();
+                Chord.DisplayMemberPath = "Name";
+                MessageBox.Show("Good");
+                ShowChord();
+            }
+           
         }
 
         private void Card_DeleteChordSongMouseClick(object sender, RoutedEventArgs e)

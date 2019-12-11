@@ -26,6 +26,7 @@ namespace Pima.View.Pages.SharedPages
     public partial class OneChord : Page
     {
         private string nameNote;
+        public static int ChordId;
         public OneChord()
         {
             InitializeComponent();
@@ -69,6 +70,9 @@ namespace Pima.View.Pages.SharedPages
             var Chord = new OracleParameter("Note", OracleDbType.Blob, image, ParameterDirection.Input);
             var sql = "BEGIN CHORDSUPDATE(:ChordsId, :Name, :Chord); END;";
             var update = db.Database.ExecuteSqlCommand(sql, ChordsId, Name, Chord);
+
+            MainWindow.SnackbarMessage.Content = "Данные сохранены!";
+            MainWindow.Snackbar.IsActive = true;
         }
     }
 }

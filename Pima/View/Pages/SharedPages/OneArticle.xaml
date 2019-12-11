@@ -57,21 +57,12 @@
                         FontSize="{DynamicResource H3}" 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center"/>
-                <Rectangle
-                    RadiusX="5"
-                    RadiusY="5"
+                <Image
                     x:FieldModifier="public"
-                    x:Name="Image"
-                    Height="400"
-                    Width="700">
-                    <Rectangle.Fill>
-                        <ImageBrush
-                            x:FieldModifier="public"
-                            x:Name="Source"
-                            ImageSource="{Binding Image}" 
-                            Stretch="Uniform"/>
-                    </Rectangle.Fill>
-                </Rectangle>
+                    x:Name="Source"
+                    Source="{Binding Image}" 
+                    Stretch="UniformToFill"
+                    Width="600"/>
                 <Button
                     Margin="20"
                     x:FieldModifier="public"
@@ -86,7 +77,7 @@
                         Width="24" />
                 </Button>
                 <TextBlock
-                    Margin="15,5,5,5"
+                    Margin="15,5,5,20"
                         x:FieldModifier="public"
                         x:Name="Text"
                         FontFamily="{DynamicResource BaseFont}"
@@ -94,7 +85,7 @@
                     TextWrapping="Wrap"
                     Text="Content"/>
                 <TextBox
-                    Margin="15,5,5,5"
+                    Margin="15,5,5,20"
                     x:FieldModifier="public"
                     x:Name="TextEditor"
                     FontFamily="{DynamicResource BaseFont}"

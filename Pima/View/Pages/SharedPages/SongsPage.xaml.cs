@@ -39,24 +39,7 @@ namespace Pima.View.Pages.SharedPages
             InitializeComponent();
         }
 
-        public static void CreateFileMP3()
-        {
-            OracleDbContext db = new OracleDbContext();
-            byte[] bytes; // переменная массива байт
-            var select = db.Songs.Where(music => music.SongsId == musicID).FirstOrDefault(); // ищем файл, который хотим воспроизвести
-            if (select != null)
-            {
-                bytes = select.Music; // присваиваем массиву байт значение из бд
-
-                string File = "music.mp3"; // файл, который будет создаваться в текущей директории 
-                string FullDirToFile = CurrDir + "\\" + File; // полный путь к файлу music.mp3 (его вначале нет, он создатся сам или перезапишется)
-                using (FileStream fstream = new FileStream(FullDirToFile, FileMode.OpenOrCreate))
-                {
-                    // запись массива байтов в файл
-                    fstream.Write(bytes, 0, bytes.Length);
-                }
-            }
-        }
+        
 
         private void Song_OpenSongMouseClick(object sender, RoutedEventArgs e)
         {
@@ -69,11 +52,11 @@ namespace Pima.View.Pages.SharedPages
                 OneSong one = new OneSong();
                 one.Name.Text = currentSong.Name;
                 one.Author.Text = currentSong.Author;
+                one.Text.Text = currentSong.Text;
                 one.ChordsComboBox.Visibility = Visibility.Collapsed;
+                one.Source.Visibility = Visibility.Collapsed;
                 if (currentSong.Music != null)
                 {
-                    CreateFileMP3();
-                    one.MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
                     one.Music.Visibility = Visibility.Visible;
                 }
                 else
@@ -103,11 +86,11 @@ namespace Pima.View.Pages.SharedPages
                 OneSong one = new OneSong();
                 one.Name.Text = currentSong.Name;
                 one.Author.Text = currentSong.Author;
+                one.Text.Text = currentSong.Text;
                 one.ChordsComboBox.Visibility = Visibility.Collapsed;
+                one.Source.Visibility = Visibility.Collapsed;
                 if (currentSong.Music != null)
                 {
-                    CreateFileMP3();
-                    one.MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
                     one.Music.Visibility = Visibility.Visible;
                 }
                 else
@@ -137,11 +120,11 @@ namespace Pima.View.Pages.SharedPages
                 OneSong one = new OneSong();
                 one.Name.Text = currentSong.Name;
                 one.Author.Text = currentSong.Author;
+                one.Text.Text = currentSong.Text;
                 one.ChordsComboBox.Visibility = Visibility.Collapsed;
+                one.Source.Visibility = Visibility.Collapsed;
                 if (currentSong.Music != null)
                 {
-                    CreateFileMP3();
-                    one.MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
                     one.Music.Visibility = Visibility.Visible;
                 }
                 else
@@ -178,11 +161,13 @@ namespace Pima.View.Pages.SharedPages
             OneSong one = new OneSong();
             one.Name.Text = currentSong.Name;
             one.Author.Text = currentSong.Author;
+            one.Text.Text = currentSong.Text;
             one.ChordsComboBox.Visibility = Visibility.Visible;
+            one.Source.Visibility = Visibility.Visible;
             if (currentSong.Music != null)
             {
-                CreateFileMP3();
-                one.MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
+                //CreateFileMP3();
+                //one.MediaElem.Source = new Uri("music.mp3", UriKind.Relative);
                 one.Music.Visibility = Visibility.Visible;
             }
             else
@@ -209,14 +194,17 @@ namespace Pima.View.Pages.SharedPages
 
             one.Name.Visibility = Visibility.Collapsed;
             one.NameTextBox.Visibility = Visibility.Visible;
-            if (currentSong.Name == null && currentSong.Author == null && currentSong.Description == null)
+            if (currentSong.Name == null && currentSong.Author == null && currentSong.Description == null && currentSong.Text == null)
             {
                 one.NameTextBox.Text = "Name";
                 one.AuthorTextBox.Text = "Author";
                 one.DescriptionEditor.Text = "Description";
+                one.TextEditor.Text = "Text";
             }
             one.Author.Visibility = Visibility.Collapsed;
             one.AuthorTextBox.Visibility = Visibility.Visible;
+            one.Text.Visibility = Visibility.Collapsed;
+            one.TextEditor.Visibility = Visibility.Visible;
             one.Description.Visibility = Visibility.Collapsed;
             one.DescriptionEditor.Visibility = Visibility.Visible;
             one.MusicAdd.Visibility = Visibility.Visible;
@@ -249,6 +237,9 @@ namespace Pima.View.Pages.SharedPages
             var UserId = new OracleParameter("UserId", OracleDbType.Int32, CurrentUser.User.UserId, ParameterDirection.Input);
             var sql = "BEGIN ADDSONGSUSER(:UserId, :SongsId); END;";
             var update = db.Database.ExecuteSqlCommand(sql, UserId, SongsId);
+
+            MainWindow.SnackbarMessage.Content = "Песня добавлена!";
+            MainWindow.Snackbar.IsActive = true;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

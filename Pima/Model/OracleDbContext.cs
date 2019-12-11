@@ -28,5 +28,6 @@ namespace Pima.Model
         public virtual DbSet<NotesUser> NotesUsers { get; set; }
         public virtual DbSet<TABsUser> TABsUsers { get; set; }
         public virtual DbSet<ArticlesUser> ArticlesUsers { get; set; }
+        public virtual DbSet<Demo> Demos { get; set; }
     }
 }

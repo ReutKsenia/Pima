@@ -26,6 +26,7 @@ namespace Pima.Model
         public virtual ICollection<NotesUser> NotesUsers { get; set; }
         public virtual ICollection<TABsUser> TABsUsers { get; set; }
         public virtual ICollection<ArticlesUser> ArticlesUsers { get; set; }
+        public virtual ICollection<Demo> Demos { get; set; }
 
         public static string getHash(string password)
         {

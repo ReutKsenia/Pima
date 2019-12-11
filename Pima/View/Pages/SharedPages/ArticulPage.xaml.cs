@@ -50,11 +50,11 @@ namespace Pima.View.Pages.SharedPages
                 
                 if(currentArticle.Image != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 (currentPage as AnonimPage).CurrentPage.Navigate(one);
             }
@@ -65,11 +65,11 @@ namespace Pima.View.Pages.SharedPages
                 one.Text.Text = currentArticle.Text;
                 if (currentArticle.Image != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 (currentPage as UserPages.UserPage).CurrentPage.Navigate(one);
             }
@@ -80,11 +80,11 @@ namespace Pima.View.Pages.SharedPages
                 one.Text.Text = currentArticle.Text;
                 if (currentArticle.Image != null)
                 {
-                    one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
+                    one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
                 }
                 else
                 {
-                    one.Image.Visibility = Visibility.Collapsed;
+                    one.Source.Visibility = Visibility.Collapsed;
                 }
                 (currentPage as AdminPage).CurrentPage.Navigate(one);
             }
@@ -160,11 +160,11 @@ namespace Pima.View.Pages.SharedPages
             one.Text.Text = currentArticle.Text;
             if (currentArticle.Image != null)
             {
-                one.Source.ImageSource = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
+                one.Source.Source = Pima.ViewModel.Converter.ConvertByteArrayToImage(currentArticle.Image);
             }
             else
             {
-                one.Image.Visibility = Visibility.Collapsed;
+                one.Source.Visibility = Visibility.Collapsed;
             }
                 (currentPage as AdminPage).CurrentPage.Navigate(one);
 
@@ -205,6 +205,9 @@ namespace Pima.View.Pages.SharedPages
             var UserId = new OracleParameter("UserId", OracleDbType.Int32, CurrentUser.User.UserId, ParameterDirection.Input);
             var sql = "BEGIN ADDARTICLEUSER(:UserId, :ArticlesId); END;";
             var update = db.Database.ExecuteSqlCommand(sql, UserId, ArticlesId);
+
+            MainWindow.SnackbarMessage.Content = "Статья добавленна!";
+            MainWindow.Snackbar.IsActive = true;
         }
 
         private void Add_UncheckedArticleMouseClick(object sender, RoutedEventArgs e)

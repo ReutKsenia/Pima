@@ -26,6 +26,7 @@ namespace Pima.View.Pages.SharedPages
     public partial class OneNote : Page
     {
         private string nameNote;
+        public static int articleId;
         public OneNote()
         {
             InitializeComponent();
@@ -71,6 +72,9 @@ namespace Pima.View.Pages.SharedPages
             var Description = new OracleParameter("Description", OracleDbType.NClob, DescriptionEditor.Text, ParameterDirection.Input);
             var sql = "BEGIN NOTESUPDATE(:NotesId, :Name, :Author, :Note, :Description); END;";
             var update = db.Database.ExecuteSqlCommand(sql, NotesId, Name, Author, Note, Description);
+
+            MainWindow.SnackbarMessage.Content = "Данные сохранены!";
+            MainWindow.Snackbar.IsActive = true;
         }
     }
 }

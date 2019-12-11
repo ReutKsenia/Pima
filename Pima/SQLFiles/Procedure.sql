@@ -88,8 +88,8 @@ END;
 --DROP PROCEDURE ARTICLEDELETE;
 CREATE OR REPLACE PROCEDURE ARTICLEDELETE(p_artid IN "Article"."ArticleId"%TYPE) IS
 BEGIN
-DELETE FROM "Article" WHERE "Article"."ArticleId" = p_artid;
 DELETE FROM "ArticlesUser" WHERE "ArticlesUser"."ArticleId_ArticlesUser"=p_artid;
+DELETE FROM "Article" WHERE "Article"."ArticleId" = p_artid;
 COMMIT;
 END;
 
@@ -130,8 +130,8 @@ END;
 --DROP PROCEDURE ARTICLEDELETE;
 CREATE OR REPLACE PROCEDURE NOTESDELETE(p_notesid IN "Notes"."NotesId"%TYPE) IS
 BEGIN
-DELETE FROM "Notes" WHERE "Notes"."NotesId" = p_notesid;
 DELETE FROM "NotesUser" WHERE "NotesUser"."NotesId_NotesUser"= p_notesid;
+DELETE FROM "Notes" WHERE "Notes"."NotesId" = p_notesid;
 COMMIT;
 END;
 
@@ -172,8 +172,8 @@ END;
 --DROP PROCEDURE TABSDELETE;
 CREATE OR REPLACE PROCEDURE TABSDELETE(p_tabsid IN "TABs"."TABsId"%TYPE) IS
 BEGIN
-DELETE FROM "TABs" WHERE "TABs"."TABsId" = p_tabsid;
 DELETE FROM "TABsUser" WHERE "TABsUser"."TABsId_TABsUser"= p_tabsid;
+DELETE FROM "TABs" WHERE "TABs"."TABsId" = p_tabsid;
 COMMIT;
 END;
 
@@ -200,8 +200,8 @@ END;
 --DROP PROCEDURE CHORDDELETE;
 CREATE OR REPLACE PROCEDURE CHORDDELETE(p_chordid IN "Chords"."ChordsId"%TYPE) IS
 BEGIN
-DELETE FROM "Chords" WHERE "Chords"."ChordsId" = p_chordid;
 DELETE FROM "ChordsSong" WHERE "ChordsSong"."ChordId_ChordsSong"=p_chordid;
+DELETE FROM "Chords" WHERE "Chords"."ChordsId" = p_chordid;
 COMMIT;
 END;
 
@@ -220,8 +220,8 @@ END;
 --DROP PROCEDURE SONGSDELETE;
 CREATE OR REPLACE PROCEDURE SONGSDELETE(p_songsid IN "Songs"."SongsId"%TYPE) IS
 BEGIN
-DELETE FROM "Songs" WHERE "Songs"."SongsId" = p_songsid;
 DELETE FROM "SongsUser" WHERE "SongsUser"."SongId_SongsUser"= p_songsid;
+DELETE FROM "Songs" WHERE "Songs"."SongsId" = p_songsid;
 COMMIT;
 END;
 
@@ -242,10 +242,11 @@ CREATE OR REPLACE PROCEDURE SONGSUPDATE(p_songsid IN "Songs"."SongsId"%TYPE,
                                         p_author IN "Songs"."Author"%TYPE,
                                         p_music IN "Songs"."Music"%TYPE,
                                         p_image IN "Songs"."Image"%TYPE,
+                                        p_text IN "Songs"."Text"%TYPE,
                                         p_descrip IN "Songs"."Description"%TYPE
                                         ) IS
 BEGIN
-UPDATE "Songs" SET "Songs"."Name" = p_name, "Songs"."Author" = p_author, "Songs"."Music" = p_music, "Songs"."Image" = p_image, "Songs"."Description" = p_descrip
+UPDATE "Songs" SET "Songs"."Name" = p_name, "Songs"."Author" = p_author, "Songs"."Music" = p_music, "Songs"."Image" = p_image, "Songs"."Text" = p_text, "Songs"."Description" = p_descrip
              WHERE "Songs"."SongsId" = p_songsid;
 COMMIT;
 END;
@@ -259,3 +260,11 @@ DELETE FROM "ChordsSong" WHERE "ChordsSong"."Id" = p_id;
 COMMIT;
 END;
 
+----------------------------------------------------------SongsUserDelete---------------------------------------------------------
+--DROP PROCEDURE SONGSUSERDELETE;
+create or replace PROCEDURE SONGSUSERDELETE(p_songid IN "SongsUser"."SongsUserId"%TYPE
+                                              ) IS
+BEGIN
+DELETE FROM "SongsUser" WHERE "SongsUser"."SongsUserId" = p_songid;
+COMMIT;
+END;

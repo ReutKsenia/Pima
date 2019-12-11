@@ -26,6 +26,7 @@ namespace Pima.View.Pages.SharedPages
     public partial class OneTAB : Page
     {
         private string nameTAB;
+        public static int TABId;
         public OneTAB()
         {
             InitializeComponent();
@@ -71,6 +72,9 @@ namespace Pima.View.Pages.SharedPages
             var Description = new OracleParameter("Description", OracleDbType.NClob, DescriptionEditor.Text, ParameterDirection.Input);
             var sql = "BEGIN TABSUPDATE(:TABsId, :Name, :Author, :TAB, :Description); END;";
             var update = db.Database.ExecuteSqlCommand(sql, TABsId, Name, Author, TAB, Description);
+
+            MainWindow.SnackbarMessage.Content = "Данные сохранены!";
+            MainWindow.Snackbar.IsActive = true;
         }
     }
 }

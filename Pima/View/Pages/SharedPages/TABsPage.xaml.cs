@@ -30,6 +30,7 @@ namespace Pima.View.Pages.SharedPages
     public partial class TABsPage : Page
     {
         OracleDbContext db = null;
+        
         public TABsPage()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace Pima.View.Pages.SharedPages
         private void TABs_OpenTABMouseClick(object sender, RoutedEventArgs e)
         {
             var currentTAB = (TABs)((Button)sender).Tag;
-
+            OneTAB.TABId = currentTAB.TABsId;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
             if (currentPage == null || (currentPage != null && currentPage.GetType().Name == "AnonimPage"))
             {
@@ -114,6 +115,7 @@ namespace Pima.View.Pages.SharedPages
         private void TABs_UpdateTABMouseClick(object sender, RoutedEventArgs e)
         {
             var currentTAB = (TABs)((Button)sender).Tag;
+            OneTAB.TABId = currentTAB.TABsId;
             var currentPage = ((MainWindow)Application.Current.MainWindow).CurrentPage.Content;
             OneTAB one = new OneTAB();
             one.Name.Text = currentTAB.Name;
